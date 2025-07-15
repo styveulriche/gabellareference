@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/gabelLaReferenceShop.iml" filepath="$PROJECT_DIR$/.idea/gabelLaReferenceShop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gabellareferenceshop/gabellareference.iml" filepath="$PROJECT_DIR$/gabellareferenceshop/gabellareference.iml" />
+    </modules>
+  </component>
+</project>
