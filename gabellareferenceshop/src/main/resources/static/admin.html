@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GABEL LA RÉFÉRENCE - Administration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Admin Header -->
+<header class="admin-header">
+    <div class="container">
+        <div class="admin-header-content">
+            <a href="index.html" class="admin-logo">GABEL ADMIN</a>
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="index.html">Retour au site</a></li>
+                </ul>
+            </nav>
+            <div class="admin-actions">
+                <button class="btn btn-small" onclick="logoutAdmin()">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Admin Main Content -->
+<main class="admin-main">
+    <!-- Admin Sidebar -->
+    <div class="admin-sidebar">
+        <ul>
+            <li><a href="#" onclick="showAdminSection('dashboard')" class="active">Tableau de bord</a></li>
+            <li><a href="#" onclick="showAdminSection('products')">Produits</a></li>
+            <li><a href="#" onclick="showAdminSection('orders')">Commandes</a></li>
+            <li><a href="#" onclick="showAdminSection('users')">Utilisateurs</a></li>
+        </ul>
+    </div>
+
+    <!-- Admin Content -->
+    <div class="admin-content">
+        <!-- Dashboard -->
+        <div id="dashboard" class="admin-section active">
+            <h2 class="section-title">Tableau de bord</h2>
+            <div id="dashboardLoading" class="loading">Chargement des statistiques...</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalProducts">0</div>
+                    <div class="stat-label">Produits</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalOrders">0</div>
+                    <div class="stat-label">Commandes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalUsers">0</div>
+                    <div class="stat-label">Utilisateurs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalRevenue">0FCFA</div>
+                    <div class="stat-label">Chiffre d'affaires</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Management -->
+        <div id="products" class="admin-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h2 class="section-title">Gestion des Produits</h2>
+                <button class="btn" onclick="showAddProductModal()">Ajouter un Produit</button>
+            </div>
+            <div id="productsLoading" class="loading">Chargement des produits...</div>
+            <div class="table-container">
+                <table id="productsTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Marque</th>
+                        <th>Prix</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Orders Management -->
+        <div id="orders" class="admin-section">
+            <h2 class="section-title">Gestion des Commandes</h2>
+            <div id="ordersLoading" class="loading">Chargement des commandes...</div>
+            <div class="table-container">
+                <table id="ordersTable">
+                    <thead>
+                    <tr>
+                        <th>Référence</th>
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Montant</th>
+                        <th>Statut</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Users Management -->
+        <div id="users" class="admin-section">
+            <h2 class="section-title">Gestion des Utilisateurs</h2>
+            <div id="usersLoading" class="loading">Chargement des utilisateurs...</div>
+            <div class="table-container">
+                <table id="usersTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Add Product Modal -->
+<div id="addProductModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Ajouter un Produit</h3>
+            <button class="close-btn" onclick="closeModal('addProductModal')">&times;</button>
+        </div>
+        <div id="addProductError" class="error" style="display: none;"></div>
+        <form id="addProductForm" class="modal-body">
+            <div class="form-group">
+                <label>Nom</label>
+                <input type="text" id="productName" required>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="productDescription" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Prix (FCFA)</label>
+                <input type="number" id="productPrice" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>Catégorie</label>
+                <select id="productCategory" required>
+                    <option value="">Sélectionner</option>
+                    <option value="homme">Homme</option>
+                    <option value="femme">Femme</option>
+                    <option value="enfant">Enfant</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Marque</label>
+                <input type="text" id="productBrand" required>
+            </div>
+            <div class="form-group">
+                <label>Couleur</label>
+                <input type="text" id="productColor" required>
+            </div>
+            <div class="form-group">
+                <label>Tailles disponibles (séparées par des virgules)</label>
+                <input type="text" id="productSizes" placeholder="36,37,38,39,40" required>
+            </div>
+            <div class="form-group">
+                <label>Stock</label>
+                <input type="number" id="productStock" required>
+            </div>
+            <div class="form-group">
+                <label>URL de l'image</label>
+                <input type="text" id="productImageUrl">
+            </div>
+            <button type="submit" class="btn" id="addProductBtn">Ajouter</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Configuration des APIs pour Spring Boot
+    const API_CONFIG = {
+        baseUrl: 'http://localhost:8082/api',
+        endpoints: {
+            users: '/users',
+            products: '/products',
+            orders: '/orders',
+            auth: '/auth'
+        }
+    };
+
+    // Gestionnaire d'APIs spécifique admin
+    class AdminApiService {
+        constructor() {
+            this.token = sessionStorage.getItem('adminToken');
+        }
+
+        async request(endpoint, options = {}) {
+            const encodedEndpoint = endpoint.replace(/ /g, '%20');
+            const url = `${API_CONFIG.baseUrl}${encodedEndpoint}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(this.token && { 'Authorization': `Bearer ${this.token}` })
+                },
+                ...options
+            };
+
+            if (config.body && typeof config.body === 'object') {
+                config.body = JSON.stringify(config.body);
+            }
+
+            try {
+                const response = await fetch(url, config);
+                const responseText = await response.text();
+
+                let responseData;
+                try {
+                    responseData = responseText ? JSON.parse(responseText) : null;
+                } catch (e) {
+                    if (!response.ok) {
+                        throw new Error(responseText || `API Error: ${response.status} ${response.statusText}`);
+                    }
+                    return responseText;
+                }
+
+                if (!response.ok) {
+                    throw new Error(responseData?.message || `API Error: ${response.status} ${response.statusText}`);
+                }
+
+                return responseData;
+            } catch (error) {
+                console.error('Admin API Request Failed:', error);
+                throw error;
+            }
+        }
+
+        // Authentification admin
+        async adminLogin(credentials) {
+            return await this.request(`${API_CONFIG.endpoints.auth}/admin/login`, {
+                method: 'POST',
+                body: credentials
+            });
+        }
+
+        // Inscription admin
+        async adminRegister(adminData) {
+            return await this.request(`${API_CONFIG.endpoints.auth}/admin/register`, {
+                method: 'POST',
+                body: adminData
+            });
+        }
+
+        setToken(token) {
+            this.token = token;
+            if (token) {
+                sessionStorage.setItem('adminToken', token);
+            } else {
+                sessionStorage.removeItem('adminToken');
+            }
+        }
+
+        // Méthodes produit
+        async createProduct(productData) {
+            return await this.request(`${API_CONFIG.endpoints.products}/creerproduit`, {
+                method: 'POST',
+                body: productData
+            });
+        }
+
+
+
+        async updateProduct(id, productData) {
+            return await this.request(`${API_CONFIG.endpoints.products}/mettre à jour un produit/${id}`, {
+                method: 'PUT',
+                body: productData
+            });
+        }
+
+        async getProduct(id) {
+            return await this.request(`${API_CONFIG.endpoints.products}/obtenirunproduitparsonid/${id}`);
+        }
+
+        async getAllProducts() {
+            return await this.request(`${API_CONFIG.endpoints.products}/listertoutlesproduit`);
+        }
+
+        async deleteProduct(id) {
+            return await this.request(`${API_CONFIG.endpoints.products}/supprimerunproduit/${id}`, {
+                method: 'DELETE'
+            });
+        }
+
+        // Méthodes utilisateur
+        async getAllUsers() {
+            return await this.request(`${API_CONFIG.endpoints.users}/recuperetouslesutilisateur`);
+        }
+
+        async deleteUser(id) {
+            return await this.request(`${API_CONFIG.endpoints.users}/supprimerutilisateur/${id}`, {
+                method: 'DELETE'
+            });
+        }
+
+        // Méthodes commande
+        async getAllOrders() {
+            return await this.request(`${API_CONFIG.endpoints.orders}/recuperertouslescommandes`);
+        }
+
+    }
+
+    // Contrôleur d'administration
+    class AdminController {
+        constructor() {
+            this.apiService = new AdminApiService();
+            this.adminUser = null;
+            this.products = [];
+            this.users = [];
+            this.orders = [];
+            this.init();
+        }
+
+        async init() {
+            this.setupEventListeners();
+            this.setupNotificationSystem();
+            this.checkAdminSession();
+            await this.loadInitialData();
+        }
+
+        setupNotificationSystem() {
+            const container = document.createElement('div');
+            container.id = 'notification-container';
+            container.style.position = 'fixed';
+            container.style.top = '20px';
+            container.style.right = '20px';
+            container.style.zIndex = '1000';
+            document.body.appendChild(container);
+        }
+
+        showNotification(message, type = 'success') {
+            const container = document.getElementById('notification-container');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            container.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        checkAdminSession() {
+            const token = sessionStorage.getItem('adminToken');
+            const userData = sessionStorage.getItem('adminUser');
+
+            if (token && userData) {
+                this.adminUser = JSON.parse(userData);
+                this.apiService.setToken(token);
+                return true;
+            }
+            return false;
+        }
+
+        async loadInitialData() {
+            try {
+                await this.loadProducts();
+                await this.loadUsers();
+                await this.loadOrders();
+                this.renderAdminStats();
+            } catch (error) {
+                console.error('Erreur lors du chargement initial admin:', error);
+            }
+        }
+
+        async loadProducts() {
+            try {
+                this.showLoading('productsLoading');
+                this.products = await this.apiService.getAllProducts();
+                this.renderAdminProducts();
+                this.hideLoading('productsLoading');
+            } catch (error) {
+                this.hideLoading('productsLoading');
+                this.showNotification('Erreur lors du chargement des produits', 'error');
+            }
+        }
+
+        async loadUsers() {
+            try {
+                this.showLoading('usersLoading');
+                this.users = await this.apiService.getAllUsers();
+                this.renderAdminUsers();
+                this.hideLoading('usersLoading');
+            } catch (error) {
+                this.hideLoading('usersLoading');
+                this.showNotification('Erreur lors du chargement des utilisateurs', 'error');
+            }
+        }
+
+        async loadOrders() {
+            try {
+                this.showLoading('ordersLoading');
+                this.orders = await this.apiService.getAllOrders();
+                this.renderAdminOrders();
+                this.hideLoading('ordersLoading');
+            } catch (error) {
+                this.hideLoading('ordersLoading');
+                this.showNotification('Erreur lors du chargement des commandes', 'error');
+            }
+        }
+
+        showLoading(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) element.style.display = 'block';
+        }
+
+        hideLoading(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) element.style.display = 'none';
+        }
+
+        async handleAdminLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('adminLoginBtn');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = 'Connexion...';
+                btn.disabled = true;
+
+                const credentials = {
+                    email: document.getElementById('adminEmail').value,
+                    password: document.getElementById('adminPassword').value
+                };
+
+                const response = await this.apiService.adminLogin(credentials);
+
+                if (response.success) {
+                    this.adminUser = response.user;
+                    this.apiService.setToken(response.token);
+                    sessionStorage.setItem('adminUser', JSON.stringify(response.user));
+                    this.showNotification('Connexion admin réussie !');
+                    showAdminSection('dashboard');
+                } else {
+                    throw new Error(response.message || 'Échec de la connexion admin');
+                }
+            } catch (error) {
+                this.showNotification(error.message, 'error');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async handleAddProduct(e) {
+            e.preventDefault();
+            const btn = document.getElementById('addProductBtn');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = 'Ajout...';
+                btn.disabled = true;
+                this.hideError('addProductError');
+
+                const newProduct = {
+                    name: document.getElementById('productName').value,
+                    description: document.getElementById('productDescription').value,
+                    price: parseFloat(document.getElementById('productPrice').value),
+                    category: document.getElementById('productCategory').value,
+                    brand: document.getElementById('productBrand').value,
+                    color: document.getElementById('productColor').value,
+                    size: document.getElementById('productSizes').value,
+                    stock: parseInt(document.getElementById('productStock').value),
+                    imageUrl: document.getElementById('productImageUrl').value || 'https://via.placeholder.com/300'
+                };
+
+                await this.apiService.createProduct(newProduct);
+
+                this.showNotification('Produit ajouté avec succès !');
+                closeModal('addProductModal');
+                await this.loadProducts();
+                e.target.reset();
+            } catch (error) {
+                this.showNotification(error.message, 'error');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        renderAdminProducts() {
+            const tableBody = document.querySelector('#productsTable tbody');
+            if (tableBody) {
+                tableBody.innerHTML = this.products.map(product => `
+                    <tr>
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td>${product.category}</td>
+                        <td>${product.brand}</td>
+                        <td>${product.price.toFixed(2)}FCFA</td>
+                        <td>${product.stock}</td>
+                        <td>
+                            <button class="action-btn edit" onclick="editProduct(${product.id})">Modifier</button>
+                            <button class="action-btn delete" onclick="deleteProduct(${product.id})">Supprimer</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        renderAdminUsers() {
+            const tableBody = document.querySelector('#usersTable tbody');
+            if (tableBody) {
+                tableBody.innerHTML = this.users.map(user => `
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${user.firstName} ${user.lastName}</td>
+                        <td>${user.email}</td>
+                        <td>${user.role}</td>
+                        <td>
+                            <button class="action-btn delete" onclick="deleteUser(${user.id})">Supprimer</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        renderAdminOrders() {
+            const tableBody = document.querySelector('#ordersTable tbody');
+            if (tableBody) {
+                tableBody.innerHTML = this.orders.map(order => `
+                    <tr>
+                        <td>${order.reference}</td>
+                        <td>${new Date(order.orderDate).toLocaleDateString()}</td>
+                        <td>${order.customerName}</td>
+                        <td>${order.totalAmount.toFixed(2)}FCFA</td>
+                        <td>${order.status}</td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        renderAdminStats() {
+            document.getElementById('totalProducts').textContent = this.products.length;
+            document.getElementById('totalUsers').textContent = this.users.length;
+            document.getElementById('totalOrders').textContent = this.orders.length;
+            document.getElementById('totalRevenue').textContent =
+                this.orders.reduce((sum, order) => sum + order.totalAmount, 0).toFixed(2) + 'FCFA';
+        }
+
+        setupEventListeners() {
+            document.getElementById('addProductForm')?.addEventListener('submit', (e) => this.handleAddProduct(e));
+        }
+    }
+
+    // Variables globales admin
+    let adminApp;
+
+    // Initialisation de l'admin
+    document.addEventListener('DOMContentLoaded', () => {
+        adminApp = new AdminController();
+    });
+
+    // Fonctions d'interface admin
+    function showAdminSection(sectionId) {
+        document.querySelectorAll('.admin-section').forEach(section => {
+            section.classList.remove('active');
+        });
+
+        const sectionElement = document.getElementById(sectionId);
+        if (sectionElement) {
+            sectionElement.classList.add('active');
+        }
+
+        // Mettre à jour le lien actif dans la sidebar
+        document.querySelectorAll('.admin-sidebar a').forEach(link => {
+            link.classList.remove('active');
+        });
+
+        document.querySelector(`.admin-sidebar a[onclick*="${sectionId}"]`).classList.add('active');
+    }
+
+    function showAddProductModal() {
+        document.getElementById('addProductModal').classList.add('active');
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('active');
+        }
+    }
+
+    async function editProduct(productId) {
+        try {
+            const product = await adminApp.apiService.getProduct(productId);
+
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productDescription').value = product.description;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productCategory').value = product.category;
+            document.getElementById('productBrand').value = product.brand;
+            document.getElementById('productColor').value = product.color;
+            document.getElementById('productSizes').value = product.size;
+            document.getElementById('productStock').value = product.stock;
+            document.getElementById('productImageUrl').value = product.imageUrl || '';
+
+            showAddProductModal();
+        } catch (error) {
+            adminApp.showNotification('Erreur lors du chargement du produit', 'error');
+        }
+    }
+
+    async function deleteProduct(productId) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+            try {
+                await adminApp.apiService.deleteProduct(productId);
+                adminApp.showNotification('Produit supprimé avec succès !');
+                await adminApp.loadProducts();
+            } catch (error) {
+                adminApp.showNotification('Erreur lors de la suppression: ' + error.message, 'error');
+            }
+        }
+    }
+
+    async function deleteUser(userId) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+            try {
+                await adminApp.apiService.deleteUser(userId);
+                adminApp.showNotification('Utilisateur supprimé avec succès !');
+                await adminApp.loadUsers();
+            } catch (error) {
+                adminApp.showNotification('Erreur lors de la suppression: ' + error.message, 'error');
+            }
+        }
+    }
+
+    function logoutAdmin() {
+        sessionStorage.removeItem('adminToken');
+        sessionStorage.removeItem('adminUser');
+        location.href = 'index.html';
+    }
+
+    // Fermeture des modales en cliquant à l'extérieur
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+            e.target.classList.remove('active');
+        }
+    });
+</script>
+</body>
+</html>

@@ -20,7 +20,7 @@ public class OrderController {
         private final OrderService orderService;
 
         // ✅ Créer une nouvelle commande
-        @PostMapping
+        @PostMapping("/creerunecommande")
         public ResponseEntity<?> createOrder(@RequestBody OrderDto orderDto) {
             try {
                 OrderDto createdOrder = orderService.createOrder(orderDto);
@@ -31,7 +31,7 @@ public class OrderController {
         }
 
         // ✅ Récupérer une commande par sa référence
-        @GetMapping("recuperercommande/{reference}")
+        @GetMapping("/recuperercommande/{reference}")
         public ResponseEntity<?> getOrder(@PathVariable String reference) {
             try {
                 OrderDto order = orderService.getOrderByReference(reference);
@@ -42,7 +42,7 @@ public class OrderController {
         }
 
         // ✅ Récupérer toutes les commandes
-        @GetMapping
+        @GetMapping("/recuperertouslescommandes")
         public ResponseEntity<List<OrderDto>> getAllOrders() {
             List<OrderDto> orders = orderService.getAllOrders();
             return ResponseEntity.ok(orders);

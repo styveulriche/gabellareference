@@ -54,6 +54,15 @@ public class UserController {
             List<UserDto> users = userService.getAllUsers();
             return ResponseEntity.ok(users);
         }
+
+
+
+        // ✅ Créer un utilisateur  un  utilisateur admin
+    @PostMapping("/admin/register")
+    public ResponseEntity<UserDto> adminregister(@RequestBody UserDto userDto) {
+        UserDto createdUser = userService.createUser(userDto);
+        return ResponseEntity.ok(createdUser);
+    }
     }
 
 

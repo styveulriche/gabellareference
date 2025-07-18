@@ -1,4 +1,6 @@
 <!--
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 &lt;!&ndash; Header &ndash;&gt;
@@ -48,6 +51,20 @@
             </div>
         </section>
 
+        &lt;!&ndash; Featured Images Gallery &ndash;&gt;
+        <section class="featured-gallery">
+            <div class="container">
+                <h2 class="section-title">Collection Vedette</h2>
+                <div id="galleryLoading" class="loading">Génération de la galerie d'images...</div>
+                <div class="gallery-container" id="featuredGallery" style="display: none;">
+                    &lt;!&ndash; Les images seront générées ici &ndash;&gt;
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn" onclick="generateFeaturedImages()">Découvrir nos Collections</button>
+                </div>
+            </div>
+        </section>
+
         <section class="products-section">
             <div class="container">
                 <h2 class="section-title">Produits Vedettes</h2>
@@ -65,11 +82,11 @@
                     <div class="filter-group">
                         <label>Catégorie</label>
                         <label for="categoryFilter"></label><select id="categoryFilter">
-                            <option value="">Toutes</option>
-                            <option value="homme">Homme</option>
-                            <option value="femme">Femme</option>
-                            <option value="enfant">Enfant</option>
-                        </select>
+                        <option value="">Toutes</option>
+                        <option value="homme">Homme</option>
+                        <option value="femme">Femme</option>
+                        <option value="enfant">Enfant</option>
+                    </select>
                     </div>
                     <div class="filter-group">
                         <label>Prix max</label>
@@ -79,18 +96,18 @@
                     <div class="filter-group">
                         <label>Taille</label>
                         <label for="sizeFilter"></label><select id="sizeFilter">
-                            <option value="">Toutes</option>
-                            <option value="36">36</option>
-                            <option value="37">37</option>
-                            <option value="38">38</option>
-                            <option value="39">39</option>
-                            <option value="40">40</option>
-                            <option value="41">41</option>
-                            <option value="42">42</option>
-                            <option value="43">43</option>
-                            <option value="44">44</option>
-                            <option value="45">45</option>
-                        </select>
+                        <option value="">Toutes</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                        <option value="42">42</option>
+                        <option value="43">43</option>
+                        <option value="44">44</option>
+                        <option value="45">45</option>
+                    </select>
                     </div>
                     <div class="filter-group">
                         <label>Recherche</label>
@@ -426,6 +443,9 @@
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="aceuille"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
@@ -434,8 +454,10 @@
         </div>
     </div>
 </footer>
-
 <script src="script.js"></script>
+<script src="admin.js"></script>
+
+
 </body>
 </html>-->
 
@@ -449,7 +471,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 <!-- Header -->
@@ -472,7 +493,7 @@
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count" id="cartCount">0</span>
                 </div>
-                <button class="btn btn-small" id="adminToggle" onclick="toggleAdmin()" style="display: none;">Admin</button>
+                <button class="btn btn-small" id="adminToggle" onclick="location.href='admin.html'" style="display: none;">Admin</button>
             </div>
         </div>
     </div>
@@ -520,37 +541,37 @@
                 <div class="filter-row">
                     <div class="filter-group">
                         <label>Catégorie</label>
-                        <label for="categoryFilter"></label><select id="categoryFilter">
-                        <option value="">Toutes</option>
-                        <option value="homme">Homme</option>
-                        <option value="femme">Femme</option>
-                        <option value="enfant">Enfant</option>
-                    </select>
+                        <select id="categoryFilter">
+                            <option value="">Toutes</option>
+                            <option value="homme">Homme</option>
+                            <option value="femme">Femme</option>
+                            <option value="enfant">Enfant</option>
+                        </select>
                     </div>
                     <div class="filter-group">
                         <label>Prix max</label>
-                        <label for="priceFilter"></label><input type="range" id="priceFilter" min="0" max="500" value="500">
-                        <span id="priceValue">500€</span>
+                        <input type="range" id="priceFilter" min="0" max="500" value="500">
+                        <span id="priceValue">500FCFA</span>
                     </div>
                     <div class="filter-group">
                         <label>Taille</label>
-                        <label for="sizeFilter"></label><select id="sizeFilter">
-                        <option value="">Toutes</option>
-                        <option value="36">36</option>
-                        <option value="37">37</option>
-                        <option value="38">38</option>
-                        <option value="39">39</option>
-                        <option value="40">40</option>
-                        <option value="41">41</option>
-                        <option value="42">42</option>
-                        <option value="43">43</option>
-                        <option value="44">44</option>
-                        <option value="45">45</option>
-                    </select>
+                        <select id="sizeFilter">
+                            <option value="">Toutes</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                        </select>
                     </div>
                     <div class="filter-group">
                         <label>Recherche</label>
-                        <label for="searchFilter"></label><input type="text" id="searchFilter" placeholder="Rechercher...">
+                        <input type="text" id="searchFilter" placeholder="Rechercher...">
                     </div>
                 </div>
             </div>
@@ -590,11 +611,11 @@
                     <form id="loginForm">
                         <div class="form-group">
                             <label>Email</label>
-                            <label for="loginEmail"></label><input type="email" id="loginEmail" required>
+                            <input type="email" id="loginEmail" required>
                         </div>
                         <div class="form-group">
                             <label>Mot de passe</label>
-                            <label for="loginPassword"></label><input type="password" id="loginPassword" required>
+                            <input type="password" id="loginPassword" required>
                         </div>
                         <button type="submit" class="btn" style="width: 100%;" id="loginBtn">Se connecter</button>
                     </form>
@@ -616,27 +637,27 @@
                     <form id="registerForm">
                         <div class="form-group">
                             <label>Prénom</label>
-                            <label for="registerFirstName"></label><input type="text" id="registerFirstName" required>
+                            <input type="text" id="registerFirstName" required>
                         </div>
                         <div class="form-group">
                             <label>Nom</label>
-                            <label for="registerLastName"></label><input type="text" id="registerLastName" required>
+                            <input type="text" id="registerLastName" required>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <label for="registerEmail"></label><input type="email" id="registerEmail" required>
+                            <input type="email" id="registerEmail" required>
                         </div>
                         <div class="form-group">
                             <label>Adresse</label>
-                            <label for="registerAddress"></label><input type="text" id="registerAddress">
+                            <input type="text" id="registerAddress">
                         </div>
                         <div class="form-group">
                             <label>Téléphone</label>
-                            <label for="registerPhone"></label><input type="text" id="registerPhone">
+                            <input type="text" id="registerPhone">
                         </div>
                         <div class="form-group">
                             <label>Mot de passe</label>
-                            <label for="registerPassword"></label><input type="password" id="registerPassword" required>
+                            <input type="password" id="registerPassword" required>
                         </div>
                         <button type="submit" class="btn" style="width: 100%;" id="registerBtn">S'inscrire</button>
                     </form>
@@ -659,11 +680,11 @@
                     <form id="contactForm">
                         <div class="form-group">
                             <label>Nom</label>
-                            <label for="contactName"></label><input type="text" id="contactName" required>
+                            <input type="text" id="contactName" required>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <label for="contactEmail"></label><input type="email" id="contactEmail" required>
+                            <input type="email" id="contactEmail" required>
                         </div>
                         <div class="form-group">
                             <label>Sujet</label>
@@ -679,110 +700,6 @@
             </div>
         </section>
     </div>
-
-    <!-- Admin Panel -->
-    <div id="admin" class="page">
-        <div class="admin-sidebar" id="adminSidebar">
-            <ul>
-                <li><a href="#" onclick="showAdminSection('dashboard')" class="active">Tableau de bord</a></li>
-                <li><a href="#" onclick="showAdminSection('products')">Produits</a></li>
-                <li><a href="#" onclick="showAdminSection('orders')">Commandes</a></li>
-                <li><a href="#" onclick="showAdminSection('users')">Utilisateurs</a></li>
-            </ul>
-        </div>
-
-        <div class="admin-content" id="adminContent">
-            <!-- Dashboard -->
-            <div id="adminDashboard" class="admin-section">
-                <h2>Tableau de bord</h2>
-                <div id="dashboardLoading" class="loading">Chargement des statistiques...</div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value" id="totalProducts">0</div>
-                        <div class="stat-label">Produits</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="totalOrders">0</div>
-                        <div class="stat-label">Commandes</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="totalUsers">0</div>
-                        <div class="stat-label">Utilisateurs</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="totalRevenue">0FCFA</div>
-                        <div class="stat-label">Chiffre d'affaires</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Products Management -->
-            <div id="adminProducts" class="admin-section hidden">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                    <h2>Gestion des Produits</h2>
-                    <button class="btn" onclick="showAddProductModal()">Ajouter un Produit</button>
-                </div>
-                <div id="adminProductsLoading" class="loading">Chargement des produits...</div>
-                <div class="table-container">
-                    <table id="productsTable">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nom</th>
-                            <th>Catégorie</th>
-                            <th>Marque</th>
-                            <th>Prix</th>
-                            <th>Stock</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Orders Management -->
-            <div id="adminOrders" class="admin-section hidden">
-                <h2>Gestion des Commandes</h2>
-                <div id="adminOrdersLoading" class="loading">Chargement des commandes...</div>
-                <div class="table-container">
-                    <table id="ordersTable">
-                        <thead>
-                        <tr>
-                            <th>Référence</th>
-                            <th>Date</th>
-                            <th>Statut</th>
-                            <th>Montant</th>
-                            <th>Client</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Users Management -->
-            <div id="adminUsers" class="admin-section hidden">
-                <h2>Gestion des Utilisateurs</h2>
-                <div id="adminUsersLoading" class="loading">Chargement des utilisateurs...</div>
-                <div class="table-container">
-                    <table id="usersTable">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nom</th>
-                            <th>Email</th>
-                            <th>Téléphone</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 </main>
 
 <!-- Product Modal -->
@@ -792,62 +709,7 @@
             <h3 class="modal-title" id="productModalTitle">Détails du Produit</h3>
             <button class="close-btn" onclick="closeModal('productModal')">&times;</button>
         </div>
-        <div id="productModalContent"></div>
-    </div>
-</div>
-
-<!-- Add Product Modal -->
-<div id="addProductModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3 class="modal-title">Ajouter un Produit</h3>
-            <button class="close-btn" onclick="closeModal('addProductModal')">&times;</button>
-        </div>
-        <div id="addProductError" class="error" style="display: none;"></div>
-        <form id="addProductForm">
-            <div class="form-group">
-                <label>Nom</label>
-                <input type="text" id="productName" required>
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <textarea id="productDescription" rows="3" required></textarea>
-            </div>
-            <div class="form-group">
-                <label>Prix (FCFA)</label>
-                <input type="number" id="productPrice" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label>Catégorie</label>
-                <select id="productCategory" required>
-                    <option value="">Sélectionner</option>
-                    <option value="homme">Homme</option>
-                    <option value="femme">Femme</option>
-                    <option value="enfant">Enfant</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Marque</label>
-                <input type="text" id="productBrand" required>
-            </div>
-            <div class="form-group">
-                <label>Couleur</label>
-                <input type="text" id="productColor" required>
-            </div>
-            <div class="form-group">
-                <label>Tailles disponibles (séparées par des virgules)</label>
-                <input type="text" id="productSizes" placeholder="36,37,38,39,40" required>
-            </div>
-            <div class="form-group">
-                <label>Stock</label>
-                <input type="number" id="productStock" required>
-            </div>
-            <div class="form-group">
-                <label>URL de l'image</label>
-                <input type="text" id="productImageUrl">
-            </div>
-            <button type="submit" class="btn" id="addProductBtn">Ajouter</button>
-        </form>
+        <div id="productModalContent" class="modal-body"></div>
     </div>
 </div>
 
@@ -882,6 +744,9 @@
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
@@ -890,8 +755,903 @@
         </div>
     </div>
 </footer>
-<script src="script.js"></script>
 
+<script>
+    // Configuration des APIs pour Spring Boot
+    const API_CONFIG = {
+        baseUrl: 'http://localhost:8082/api',
+        endpoints: {
+            users: '/users',
+            products: '/products',
+            orders: '/commandes',
+            auth: '/auth'
+        }
+    };
 
+    // Gestionnaire d'APIs
+    class ApiService {
+        constructor() {
+            // Récupère le token d'authentification du sessionStorage
+            this.token = sessionStorage.getItem('authToken');
+        }
+
+        async request(endpoint, options = {}) {
+            const encodedEndpoint = endpoint.replace(/ /g, '%20');
+            const url = `${API_CONFIG.baseUrl}${encodedEndpoint}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(this.token && { 'Authorization': `Bearer ${this.token}` })
+                },
+                ...options
+            };
+
+            if (config.body && typeof config.body === 'object') {
+                config.body = JSON.stringify(config.body);
+            }
+
+            try {
+                const response = await fetch(url, config);
+                const responseText = await response.text();
+
+                // Gestion des réponses non-JSON
+                let responseData;
+                try {
+                    responseData = responseText ? JSON.parse(responseText) : null;
+                } catch (e) {
+                    // Si le parsing JSON échoue, traiter comme texte brut
+                    if (!response.ok) {
+                        throw new Error(responseText || `API Error: ${response.status} ${response.statusText}`);
+                    }
+                    return responseText;
+                }
+
+                if (!response.ok) {
+                    throw new Error(responseData?.message || `API Error: ${response.status} ${response.statusText}`);
+                }
+
+                return responseData;
+            } catch (error) {
+                console.error('API Request Failed:', error);
+                throw error;
+            }
+        }
+
+        // Méthodes utilisateur
+        async createUser(userData) {
+            return await this.request(`${API_CONFIG.endpoints.users}/creerutilisateur`, {
+                method: 'POST',
+                body: userData
+            });
+        }
+
+        async updateUser(id, userData) {
+            return await this.request(`${API_CONFIG.endpoints.users}/modifierutilisateur/${id}`, {
+                method: 'PUT',
+                body: userData
+            });
+        }
+
+        async getUser(id) {
+            return await this.request(`${API_CONFIG.endpoints.users}/recupereutilisateur/${id}`);
+        }
+
+        async getAllUsers() {
+            return await this.request(`${API_CONFIG.endpoints.users}/recupere tous les utilisateur`);
+        }
+
+        async deleteUser(id) {
+            return await this.request(`${API_CONFIG.endpoints.users}/supprimerutilisateur/${id}`, {
+                method: 'DELETE'
+            });
+        }
+
+        // Méthodes produit
+        async createProduct(productData) {
+            return await this.request(`${API_CONFIG.endpoints.products}/creerproduit`, {
+                method: 'POST',
+                body: productData
+            });
+        }
+
+        async updateProduct(id, productData) {
+            return await this.request(`${API_CONFIG.endpoints.products}/mettre à jour un produit/${id}`, {
+                method: 'PUT',
+                body: productData
+            });
+        }
+
+        async getProduct(id) {
+            return await this.request(`${API_CONFIG.endpoints.products}/obtenirunproduitparsonid/${id}`);
+        }
+
+        async getAllProducts() {
+            return await this.request(`${API_CONFIG.endpoints.products}/listertoutlesproduit`);
+        }
+
+        async deleteProduct(id) {
+            return await this.request(`${API_CONFIG.endpoints.products}/supprimerunproduit/${id}`, {
+                method: 'DELETE'
+            });
+        }
+
+        // Méthodes commande
+        async createOrder(orderData) {
+            return await this.request(`${API_CONFIG.endpoints.orders}`, {
+                method: 'POST',
+                body: orderData
+            });
+        }
+
+        async getAllOrders() {
+            return await this.request(`${API_CONFIG.endpoints.orders}`);
+        }
+
+        async getOrder(reference) {
+            return await this.request(`${API_CONFIG.endpoints.orders}/${reference}`);
+        }
+
+        async deleteOrder(reference) {
+            return await this.request(`${API_CONFIG.endpoints.orders}/${reference}`, {
+                method: 'DELETE'
+            });
+        }
+
+        // Authentification
+        async login(credentials) {
+            return await this.request(`${API_CONFIG.endpoints.auth}/login`, {
+                method: 'POST',
+                body: credentials
+            });
+        }
+
+        setToken(token) {
+            this.token = token;
+            if (token) {
+                sessionStorage.setItem('authToken', token);
+            } else {
+                sessionStorage.removeItem('authToken');
+            }
+        }
+    }
+
+    // Contrôleur principal de l'application
+    class AppController {
+        constructor() {
+            this.apiService = new ApiService();
+            this.currentUser = null;
+            this.cart = [];
+            this.products = [];
+            this.isAdminMode = false;
+            this.init();
+        }
+
+        async init() {
+            this.setupEventListeners();
+            this.setupDarkMode();
+            this.setupNotificationSystem();
+            await this.loadInitialData();
+        }
+
+        setupNotificationSystem() {
+            const container = document.createElement('div');
+            container.id = 'notification-container';
+            container.style.position = 'fixed';
+            container.style.top = '20px';
+            container.style.right = '20px';
+            container.style.zIndex = '1000';
+            document.body.appendChild(container);
+        }
+
+        showNotification(message, type = 'success') {
+            const container = document.getElementById('notification-container');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            container.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        setupDarkMode() {
+            if (!(!window.matchMedia || !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                if (event.matches) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            });
+        }
+
+        async loadInitialData() {
+            try {
+                await this.loadProducts();
+                await this.loadCart();
+                this.checkUserSession();
+            } catch (error) {
+                console.error('Erreur lors du chargement initial:', error);
+            }
+        }
+
+        async loadProducts() {
+            try {
+                this.showLoading('featuredProductsLoading');
+                this.showLoading('allProductsLoading');
+
+                this.products = await this.apiService.getAllProducts();
+
+                this.renderFeaturedProducts();
+                this.renderAllProducts();
+
+                this.hideLoading('featuredProductsLoading');
+                this.hideLoading('allProductsLoading');
+            } catch (error) {
+                this.hideLoading('featuredProductsLoading');
+                this.hideLoading('allProductsLoading');
+                this.showNotification('Erreur lors du chargement des produits', 'error');
+            }
+        }
+
+        async loadCart() {
+            try {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                this.cart = cart;
+                this.updateCartCount();
+            } catch (error) {
+                console.error('Erreur lors du chargement du panier:', error);
+                this.cart = [];
+            }
+        }
+
+        saveCart() {
+            localStorage.setItem('cart', JSON.stringify(this.cart));
+        }
+
+        checkUserSession() {
+            const token = sessionStorage.getItem('authToken');
+            const userData = sessionStorage.getItem('currentUser');
+
+            if (token && userData) {
+                this.currentUser = JSON.parse(userData);
+                this.apiService.setToken(token);
+
+                if (this.currentUser.role === 'admin') {
+                    document.getElementById('adminToggle').style.display = 'block';
+                }
+            }
+        }
+
+        setupEventListeners() {
+            // Filtres
+            document.getElementById('categoryFilter')?.addEventListener('change', () => this.applyFilters());
+            document.getElementById('priceFilter')?.addEventListener('input', (e) => {
+                document.getElementById('priceValue').textContent = e.target.value + 'FCFA';
+                this.applyFilters();
+            });
+            document.getElementById('sizeFilter')?.addEventListener('change', () => this.applyFilters());
+            document.getElementById('searchFilter')?.addEventListener('input', () => this.applyFilters());
+
+            // Formulaires
+            document.getElementById('loginForm')?.addEventListener('submit', (e) => this.handleLogin(e));
+            document.getElementById('registerForm')?.addEventListener('submit', (e) => this.handleRegister(e));
+            document.getElementById('contactForm')?.addEventListener('submit', (e) => this.handleContact(e));
+        }
+
+        showLoading(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) element.style.display = 'block';
+        }
+
+        hideLoading(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) element.style.display = 'none';
+        }
+
+        showError(message, containerId = null) {
+            if (containerId) {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.textContent = message;
+                    container.style.display = 'block';
+                }
+            } else {
+                this.showNotification(message, 'error');
+            }
+        }
+
+        hideError(containerId) {
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.style.display = 'none';
+            }
+        }
+
+        renderFeaturedProducts() {
+            const featuredProducts = this.products.filter(p => p.featured);
+            const container = document.getElementById('featuredProducts');
+            if (container) {
+                container.innerHTML = featuredProducts.map(product => this.createProductCard(product)).join('');
+            }
+        }
+
+        renderAllProducts() {
+            const container = document.getElementById('allProducts');
+            if (container) {
+                container.innerHTML = this.products.map(product => this.createProductCard(product)).join('');
+            }
+        }
+
+        createProductCard(product) {
+            return `
+                <div class="product-card" onclick="showProductModal(${product.id})">
+                    <div class="product-image">
+                        ${product.imageUrl ?
+                `<img src="${product.imageUrl}" alt="${product.name}">` :
+                `<i class="fas fa-shoe-prints"></i>`
+            }
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</p>
+                        <p class="product-price">${product.price.toFixed(2)}FCFA</p>
+                        <div class="product-actions">
+                            <button class="btn btn-small" onclick="event.stopPropagation(); addToCart(${product.id})">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                            <button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); showProductModal(${product.id})">
+                                Détails
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        applyFilters() {
+            const category = document.getElementById('categoryFilter')?.value || '';
+            const maxPrice = parseFloat(document.getElementById('priceFilter')?.value || 100000);
+            const size = document.getElementById('sizeFilter')?.value || '';
+            const search = document.getElementById('searchFilter')?.value.toLowerCase() || '';
+
+            const filtered = this.products.filter(product => {
+                const matchCategory = !category || product.category === category;
+                const matchPrice = product.price <= maxPrice;
+                const matchSize = !size || (product.size && product.size.includes(size));
+                const matchSearch = !search || product.name.toLowerCase().includes(search);
+
+                return matchCategory && matchPrice && matchSize && matchSearch;
+            });
+
+            const container = document.getElementById('allProducts');
+            if (container) {
+                container.innerHTML = filtered.map(product => this.createProductCard(product)).join('');
+            }
+        }
+
+        async handleLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = 'Connexion...';
+                btn.disabled = true;
+                this.hideError('loginError');
+
+                const credentials = {
+                    email: document.getElementById('loginEmail').value,
+                    password: document.getElementById('loginPassword').value
+                };
+
+                const response = await this.apiService.login(credentials);
+
+                // Gestion des réponses texte ou JSON
+                if (typeof response === 'string') {
+                    if (response.includes('Connexion réussie')) {
+                        // Récupérer l'utilisateur via une autre API si nécessaire
+                        this.showNotification('Connexion réussie !');
+                        showPage('home');
+                        return;
+                    }
+                    throw new Error(response);
+                }
+
+                if (response.success) {
+                    this.currentUser = response.user;
+                    this.apiService.setToken(response.token);
+                    sessionStorage.setItem('currentUser', JSON.stringify(response.user));
+
+                    if (response.user.role === 'admin') {
+                        document.getElementById('adminToggle').style.display = 'block';
+                    }
+
+                    this.showNotification('Connexion réussie !');
+                    showPage('home');
+                } else {
+                    throw new Error(response.message || 'Échec de la connexion');
+                }
+            } catch (error) {
+                this.showError(error.message, 'loginError');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async handleRegister(e) {
+            e.preventDefault();
+            const btn = document.getElementById('registerBtn');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = 'Inscription...';
+                btn.disabled = true;
+                this.hideError('registerError');
+
+                const userData = {
+                    firstName: document.getElementById('registerFirstName').value,
+                    lastName: document.getElementById('registerLastName').value,
+                    email: document.getElementById('registerEmail').value,
+                    address: document.getElementById('registerAddress').value,
+                    phone: document.getElementById('registerPhone').value,
+                    password: document.getElementById('registerPassword').value
+                };
+
+                const response = await this.apiService.createUser(userData);
+
+                // Gestion des réponses texte ou JSON
+                if (typeof response === 'string') {
+                    if (response.includes('Inscription réussie')) {
+                        this.showNotification('Inscription réussie !');
+                        showPage('home');
+                        return;
+                    }
+                    throw new Error(response);
+                }
+
+                if (response.success) {
+                    this.currentUser = response.user;
+                    this.apiService.setToken(response.token);
+                    sessionStorage.setItem('currentUser', JSON.stringify(response.user));
+
+                    this.showNotification('Inscription réussie !');
+                    showPage('home');
+                } else {
+                    throw new Error(response.message || 'Échec de l\'inscription');
+                }
+            } catch (error) {
+                this.showError(error.message, 'registerError');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async handleContact(e) {
+            e.preventDefault();
+            const btn = document.getElementById('contactBtn');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = 'Envoi...';
+                btn.disabled = true;
+                this.hideError('contactError');
+
+                const contactData = {
+                    name: document.getElementById('contactName').value,
+                    email: document.getElementById('contactEmail').value,
+                    subject: document.getElementById('contactSubject').value,
+                    message: document.getElementById('contactMessage').value
+                };
+
+                document.getElementById('contactSuccess').style.display = 'block';
+                e.target.reset();
+
+                setTimeout(() => {
+                    document.getElementById('contactSuccess').style.display = 'none';
+                }, 5000);
+            } catch (error) {
+                this.showError(error.message, 'contactError');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async renderCart() {
+            const container = document.getElementById('cartItems');
+            const totalElement = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            try {
+                this.showLoading('cartLoading');
+
+                if (this.cart.length === 0) {
+                    container.innerHTML = '<p style="text-align: center; padding: 2rem;">Votre panier est vide</p>';
+                    totalElement.textContent = 'Total: 0FCFA';
+                    checkoutBtn.disabled = true;
+                    this.hideLoading('cartLoading');
+                    return;
+                }
+
+                let total = 0;
+                container.innerHTML = this.cart.map(item => {
+                    const product = this.products.find(p => p.id === item.productId);
+                    if (!product) return '';
+
+                    const itemTotal = product.price * item.quantity;
+                    total += itemTotal;
+
+                    return `
+                        <div class="cart-item">
+                            <div class="cart-item-image">
+                                ${product.imageUrl ?
+                        `<img src="${product.imageUrl}" alt="${product.name}">` :
+                        `<i class="fas fa-shoe-prints"></i>`
+                    }
+                            </div>
+                            <div class="cart-item-info">
+                                <div class="cart-item-title">${product.name}</div>
+                                <div class="cart-item-price">${product.price.toFixed(2)}FCFA</div>
+                                <div>Taille: ${item.size}</div>
+                            </div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="updateCartQuantity(${item.productId}, '${item.size}', ${item.quantity - 1})">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateCartQuantity(${item.productId}, '${item.size}', ${item.quantity + 1})">+</button>
+                            </div>
+                            <button class="btn btn-small" onclick="removeFromCart(${item.productId}, '${item.size}')">Supprimer</button>
+                        </div>
+                    `;
+                }).join('');
+
+                totalElement.textContent = `Total: ${total.toFixed(2)}FCFA`;
+                checkoutBtn.disabled = false;
+
+            } catch (error) {
+                container.innerHTML = '<div class="error">Erreur lors du chargement du panier</div>';
+            } finally {
+                this.hideLoading('cartLoading');
+            }
+        }
+
+        updateCartCount() {
+            const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+            }
+            this.saveCart();
+        }
+    }
+
+    // Variables globales
+    let app;
+
+    // Initialisation de l'application
+    document.addEventListener('DOMContentLoaded', () => {
+        app = new AppController();
+    });
+
+    // Fonctions globales pour l'interface
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+
+        const pageElement = document.getElementById(pageId);
+        if (pageElement) {
+            pageElement.classList.add('active');
+        }
+
+        if (pageId === 'cart') {
+            app.renderCart();
+        } else if (pageId === 'home') {
+            app.loadProducts();
+        }
+    }
+
+    async function showProductModal(productId) {
+        const product = app.products.find(p => p.id === productId);
+
+        if (!product) return;
+
+        const modal = document.getElementById('productModal');
+        const content = document.getElementById('productModalContent');
+
+        if (content) {
+            content.innerHTML = `
+                <div style="text-align: center;">
+                    <div class="product-image" style="margin-bottom: 1rem; height: 200px;">
+                        ${product.imageUrl ?
+                `<img src="${product.imageUrl}" alt="${product.name}" style="max-width: 100%; max-height: 100%;">` :
+                `<i class="fas fa-shoe-prints"></i>`
+            }
+                    </div>
+                    <h3>${product.name}</h3>
+                    <p style="color: var(--primary-dark); margin: 1">${product.description}</p>
+                    <p style="font-size: 1.5rem; color: var(--primary-dark); font-weight: 700; margin: 1rem 0;">${product.price.toFixed(2)}FCFA</p>
+                    <div style="margin: 1rem 0;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Taille :</label>
+                        <select id="selectedSize" style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            ${product.size.split(',').map(size =>
+                `<option value="${size.trim()}">${size.trim()}</option>`
+            ).join('')}
+                        </select>
+                    </div>
+                    <button class="btn" onclick="addToCartWithSize(${product.id})" style="width: 100%;">
+                        Ajouter au Panier
+                    </button>
+                </div>
+            `;
+        }
+
+        if (modal) {
+            modal.classList.add('active');
+        }
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('active');
+        }
+    }
+
+    async function addToCart(productId) {
+        const product = app.products.find(p => p.id === productId);
+
+        if (!product || !product.size) return;
+
+        try {
+            const defaultSize = product.size.split(',')[0].trim();
+            app.cart.push({
+                productId: productId,
+                size: defaultSize,
+                quantity: 1
+            });
+
+            app.updateCartCount();
+            app.showNotification('Produit ajouté au panier !');
+        } catch (error) {
+            app.showNotification('Erreur lors de l\'ajout au panier', 'error');
+        }
+    }
+
+    async function addToCartWithSize(productId) {
+        const selectedSize = document.getElementById('selectedSize')?.value || '';
+
+        try {
+            app.cart.push({
+                productId: productId,
+                size: selectedSize,
+                quantity: 1
+            });
+
+            app.updateCartCount();
+            closeModal('productModal');
+            app.showNotification('Produit ajouté au panier !');
+        } catch (error) {
+            app.showNotification('Erreur lors de l\'ajout au panier', 'error');
+        }
+    }
+
+    function updateCartQuantity(productId, size, newQuantity) {
+        if (newQuantity <= 0) {
+            removeFromCart(productId, size);
+            return;
+        }
+
+        const item = app.cart.find(item =>
+            item.productId === productId && item.size === size
+        );
+
+        if (item) {
+            item.quantity = newQuantity;
+            app.updateCartCount();
+            app.renderCart();
+        }
+    }
+
+    function removeFromCart(productId, size) {
+        app.cart = app.cart.filter(item =>
+            !(item.productId === productId && item.size === size)
+        );
+        app.updateCartCount();
+        app.renderCart();
+        app.showNotification('Produit retiré du panier');
+    }
+
+    async function proceedToCheckout() {
+        if (!app.currentUser) {
+            app.showNotification('Veuillez vous connecter pour finaliser votre commande', 'error');
+            showPage('login');
+            return;
+        }
+
+        if (app.cart.length === 0) {
+            app.showNotification('Votre panier est vide', 'error');
+            return;
+        }
+
+        try {
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            checkoutBtn.textContent = 'Traitement...';
+            checkoutBtn.disabled = true;
+
+            let total = 0;
+            const items = app.cart.map(item => {
+                const product = app.products.find(p => p.id === item.productId);
+                if (product) {
+                    const itemTotal = product.price * item.quantity;
+                    total += itemTotal;
+                    return {
+                        productId: item.productId,
+                        quantity: item.quantity,
+                        unitPrice: product.price
+                    };
+                }
+                return null;
+            }).filter(item => item !== null);
+
+            const orderData = {
+                reference: `CMD-${Date.now()}`,
+                orderDate: new Date().toISOString().split('T')[0],
+                status: "En attente",
+                totalAmount: total,
+                customerId: app.currentUser.id,
+                items: items
+            };
+
+            const order = await app.apiService.createOrder(orderData);
+
+            // Vider le panier après commande
+            app.cart = [];
+            app.updateCartCount();
+
+            app.showNotification(`Commande #${order.reference} créée avec succès ! Total: ${total.toFixed(2)}FCFA`);
+            showPage('home');
+        } catch (error) {
+            app.showNotification('Erreur lors de la création de la commande: ' + error.message, 'error');
+        } finally {
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            if (checkoutBtn) {
+                checkoutBtn.textContent = 'Procéder au Paiement';
+                checkoutBtn.disabled = false;
+            }
+        }
+    }
+
+    // Fermeture des modales en cliquant à l'extérieur
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+            e.target.classList.remove('active');
+        }
+    });
+
+    // Featured Images Generation with Real Online Images
+    let featuredImagesGenerated = false;
+
+    function generateFeaturedImages() {
+        if (featuredImagesGenerated) {
+            document.getElementById('featuredGallery').style.display = 'grid';
+            return;
+        }
+
+        const galleryLoading = document.getElementById('galleryLoading');
+        const featuredGallery = document.getElementById('featuredGallery');
+
+        galleryLoading.style.display = 'block';
+        featuredGallery.style.display = 'none';
+
+        // Real product images from online sources
+        const products = [
+            {
+                title: "Babouches Traditionnelles",
+                description: "Artisanat traditionnel marocain",
+                imageUrl: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Sneakers Modernes",
+                description: "Design contemporain et confort",
+                imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Babouches Colorées",
+                description: "Couleurs vives et motifs authentiques",
+                imageUrl: "https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Talons Élégants",
+                description: "Élégance et sophistication",
+                imageUrl: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Babouches Royales",
+                description: "Luxe et tradition",
+                imageUrl: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Sneakers Casual",
+                description: "Style décontracté moderne",
+                imageUrl: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Babouches de Mariage",
+                description: "Cérémonie et raffinement",
+                imageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Chaussures Oxford",
+                description: "Classique et professionnel",
+                imageUrl: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Babouches Artisanales",
+                description: "Fait main avec passion",
+                imageUrl: "https://images.unsplash.com/photo-1595341888016-a392ef81b7de?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Boots Tendance",
+                description: "Tendance urbaine",
+                imageUrl: "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Sandales Premium",
+                description: "Confort et style été",
+                imageUrl: "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=400&h=400&fit=crop&crop=center"
+            },
+            {
+                title: "Mocassins Luxe",
+                description: "Élégance décontractée",
+                imageUrl: "https://images.unsplash.com/photo-1595341888016-a392ef81b7de?w=400&h=400&fit=crop&crop=center"
+            }
+        ];
+
+        // Create gallery items with animated delay
+        products.forEach((product, index) => {
+            setTimeout(() => {
+                createGalleryItem(product.imageUrl, product.title, product.description, index);
+
+                if (index === products.length - 1) {
+                    galleryLoading.style.display = 'none';
+                    featuredGallery.style.display = 'grid';
+                    featuredImagesGenerated = true;
+                }
+            }, index * 200);
+        });
+    }
+
+    function createGalleryItem(imageUrl, title, description, index) {
+        const featuredGallery = document.getElementById('featuredGallery');
+
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.style.animationDelay = `${index * 0.1}s`;
+
+        galleryItem.innerHTML = `
+            <img src="${imageUrl}" alt="${title}" loading="lazy">
+            <div class="gallery-overlay">
+                <h3>${title}</h3>
+                <p>${description}</p>
+            </div>
+        `;
+
+        featuredGallery.appendChild(galleryItem);
+    }
+
+    // Auto-generate images on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Generate images automatically when page loads
+        setTimeout(() => {
+            generateFeaturedImages();
+        }, 1000);
+    });
+</script>
 </body>
 </html>

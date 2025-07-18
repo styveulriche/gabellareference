@@ -11,4 +11,5 @@ public interface UserService {
     void deleteUser(Long id);
     UserDto getUserById(Long id);
     List<UserDto> getAllUsers();
+    UserDto adminregister(UserDto userDto);
 }

@@ -40,6 +40,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto adminregister(UserDto userDto) {
+        User user = userMapper.toEntity(userDto);
+
+        // Encodage du mot de passe
+        if (userDto.getPassword() != null && !userDto.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        }
+
+        // Si aucun rôle n'est défini, on affect par défaut mais ici c'est l'utilisation dirrect de la page d'enregistrement admin
+        if (user.getRole() == null) {
+            user.setRole(Role.ADMIN); // Enum : Role.USER
+        }
+
+        return userMapper.toDto(userRepository.save(user));
+    }
+
+    @Override
     public UserDto updateUser(Long id, UserDto userDto) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé"));

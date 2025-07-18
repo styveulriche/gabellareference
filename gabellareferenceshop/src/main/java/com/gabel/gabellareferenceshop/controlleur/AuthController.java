@@ -28,21 +28,31 @@ public class AuthController {
          */
         @PostMapping("/login")
         public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
-            try {
-                boolean isAuthenticated = authService.authenticate(loginDto.getEmail(), loginDto.getPassword());
-
-                if (isAuthenticated) {
-                    String token = jwtUtils.generateToken(loginDto.getEmail());
-                    return ResponseEntity.ok().body("Connexion réussie. Token : Bearer " + token);
-                } else {
-                    return ResponseEntity.status(401).body("Échec de connexion : identifiants invalides.");
-                }
-            } catch (Exception e) {
-                // Log l’erreur si tu as un logger
-                // logger.error("Erreur lors de la tentative de connexion", e);
-                return ResponseEntity.status(500).body("Erreur serveur lors de la connexion : " + e.getMessage());
-            }
+            return getResponseEntity(loginDto);
         }
+
+    public ResponseEntity<?> getResponseEntity(@RequestBody LoginDto loginDto) {
+        try {
+            boolean isAuthenticated = authService.authenticate(loginDto.getEmail(), loginDto.getPassword());
+
+            if (isAuthenticated) {
+                String token = jwtUtils.generateToken(loginDto.getEmail());
+                return ResponseEntity.ok().body("Connexion réussie. Token : Bearer " + token);
+            } else {
+                return ResponseEntity.status(401).body("Échec de connexion : identifiants invalides.");
+            }
+        } catch (Exception e) {
+            // Log l’erreur si tu as un logger
+            // logger.error("Erreur lors de la tentative de connexion", e);
+            return ResponseEntity.status(500).body("Erreur serveur lors de la connexion : " + e.getMessage());
+        }
+    }
+
+
+    @PostMapping("admin/login")
+    public ResponseEntity<?> adminlogin(@RequestBody LoginDto loginDto) {
+        return getResponseEntity(loginDto);
+    }
 
 }
 
